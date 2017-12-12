@@ -21,4 +21,6 @@ public interface VehiculoDAO {
 
 	public List<Vehiculo> listadoByIdCliente(int idCliente);
 	
+	public List<Vehiculo> listadoPaginado(int tamanyoPagina);
+	
 }

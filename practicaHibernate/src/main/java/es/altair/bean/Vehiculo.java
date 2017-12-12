@@ -15,15 +15,14 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.ScriptAssert;
 
 @Entity
 @Table(name="vehiculo")
-//@ScriptAssert.List({
-//	@ScriptAssert(lang="javascript", script="(_this.matricula /\\d{4}^[A-Za-z]{3}$/)? true : false", message="La matricula no es correcta")
-//})// /^[A-Za-z]{4}\d{4}$/   /\d{4}^[A-Za-z]{3}$/
+
 public class Vehiculo implements Serializable{
 
 	@Id
