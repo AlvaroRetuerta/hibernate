@@ -107,7 +107,7 @@ public class App {
 				System.out.println("\t\t\t║                            ║");
 				System.out.println("\t\t\t║    2)   Delete.            ║");
 				System.out.println("\t\t\t║                            ║");
-				System.out.println("\t\t\t║    3)   List.   	       ║");
+				System.out.println("\t\t\t║    3)   List.              ║");
 				System.out.println("\t\t\t║                            ║");
 				System.out.println("\t\t\t║    4)   Update.            ║");
 				System.out.println("\t\t\t║                            ║");
@@ -122,7 +122,7 @@ public class App {
 				opcion2 = sc.nextInt();
 
 				switch (opcion2) {
-				case 1:
+				case 1://insert
 					System.out.println("Marca:");
 					String marca = sc.next();
 					System.out.println("Modelo:");
@@ -134,20 +134,30 @@ public class App {
 					Oficina o = ofiDAO.get(idOficina);
 					vDAO.save(new Vehiculo(marca, modelo, o, matricula));
 					break;
-				case 2:
+				case 2://delete
 					System.out.println("Id del vehiculo a eliminar:");
+					List<Vehiculo> vehiculos = vDAO.listado();
+					System.out.println("IDs Vehiculos");
+					for (Vehiculo vehiculo : vehiculos) {
+						System.out.println(vehiculo.getIdVehiculo());
+					}
 					int idVehiculo = sc.nextInt();
 					// Vehiculo vd= vDAO.get(idVehiculo);
 					vDAO.deleteById(idVehiculo);
 					break;
 				case 3:
-					List<Vehiculo> vehiculos = vDAO.listado();
+					vehiculos = vDAO.listado();
 					for (Vehiculo vehiculo : vehiculos) {
 						System.out.println(vehiculo);
 					}
 					break;
 				case 4:
 					System.out.println("id del vehiculo a actualizar:");
+					System.out.println("IDs Veehiculos");
+					vehiculos = vDAO.listado();
+					for (Vehiculo vehiculo : vehiculos) {
+						System.out.println(vehiculo.getIdVehiculo());
+					}
 					int idV = sc.nextInt();
 					Vehiculo vu = vDAO.get(idV);
 					System.out.println("nueva Marca:");
@@ -157,6 +167,11 @@ public class App {
 					System.out.println("nueva Matricula:");
 					vu.setMatricula(sc.next());
 					System.out.println("nuevo Id Oficina");
+					List<Oficina> oficinas = ofiDAO.listado();
+					System.out.println("IDs Oficinas");
+					for (Oficina oficina : oficinas) {
+						System.out.println(oficina.getIdOficina());
+					}
 					int idOficinaU = sc.nextInt();
 					Oficina oU = ofiDAO.get(idOficinaU);
 					vu.setOficina(oU);
@@ -164,9 +179,14 @@ public class App {
 					break;
 				case 5:
 					System.out.println("Id del cliente por el que buscar:");
+					List<Cliente> clientes = cDAO.listado();
+					System.out.println("IDs Clientes");
+					for (Cliente cliente : clientes) {
+						System.out.println(cliente.getIdCliente());
+					}
 					int idCliente = sc.nextInt();
-					 List<Vehiculo> vehiculos1 = vDAO.listadoByIdCliente(idCliente);
-					 for (Vehiculo vehiculo : vehiculos1) {
+					 vehiculos = vDAO.listadoByIdCliente(idCliente);
+					 for (Vehiculo vehiculo : vehiculos) {
 						 System.out.println(vehiculo.toString());
 					 }
 					break;
@@ -211,18 +231,28 @@ public class App {
 					break;
 				case 2:// delete
 					System.out.println("Id Oficina");
+					List<Oficina> oficinas = ofiDAO.listado();
+					System.out.println("IDs Oficinas");
+					for (Oficina oficina : oficinas) {
+						System.out.println(oficina.getIdOficina());
+					}
 					int idOfi = sc.nextInt();
 					Oficina od = ofiDAO.get(idOfi);
 					ofiDAO.delete(od);
 					break;
 				case 3:// list
-					List<Oficina> oficinas = ofiDAO.listado();
+					oficinas = ofiDAO.listado();
 					for (Oficina oficina : oficinas) {
 						System.out.println(oficina);
 					}
 					break;
 				case 4:
 					System.out.println("id oficina");
+					oficinas = ofiDAO.listado();
+					System.out.println("IDs Oficinas");
+					for (Oficina oficina : oficinas) {
+						System.out.println(oficina.getIdOficina());
+					}
 					Oficina o = ofiDAO.get(sc.nextInt());
 					System.out.println("nueva Ciudad");
 					o.setCiudad(sc.next());
@@ -266,12 +296,16 @@ public class App {
 					break;
 				case 2:// delete
 					System.out.println("Id Cliente");
+					List<Cliente> clientes = cDAO.listado();
+					for (Cliente cliente : clientes) {
+						System.out.println(cliente.getIdCliente());
+					}
 					int idCd = sc.nextInt();
 					// Cliente cd = cDAO.get(idCd);
 					cDAO.deleteById(idCd);
 					break;
 				case 3:// list
-					List<Cliente> clientes = cDAO.listado();
+					clientes = cDAO.listado();
 					for (Cliente cliente : clientes) {
 						System.out.println(cliente);
 					}
@@ -279,6 +313,10 @@ public class App {
 					break;
 				case 4:
 					System.out.println("id");
+					clientes = cDAO.listado();
+					for (Cliente cliente : clientes) {
+						System.out.println(cliente.getIdCliente());
+					}
 					Cliente c = cDAO.get(sc.nextInt());
 					System.out.println("Nuevo nombre");
 					c.setNombre(sc.next());

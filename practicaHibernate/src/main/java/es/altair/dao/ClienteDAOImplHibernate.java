@@ -103,7 +103,7 @@ public class ClienteDAOImplHibernate implements ClienteDAO {
 
 		try {
 			sesion.beginTransaction();
-			clientes = sesion.createQuery("FROM Oficina o").list();
+			clientes = sesion.createQuery("FROM Cliente c").list();
 			sesion.getTransaction().commit();
 		} catch (Exception e) {
 			// TODO: handle exception
